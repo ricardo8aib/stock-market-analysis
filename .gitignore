@@ -1,0 +1,17 @@
+# TF files
+.terraform
+*.lock.hcl
+*.tfstate.backup
+terraform.tfstate
+
+# Pychache files
+__pycache__
+
+# .pem files
+*.pem
+
+# .env files
+*.env
+
+# .DS_Store
+*.DS_Store
