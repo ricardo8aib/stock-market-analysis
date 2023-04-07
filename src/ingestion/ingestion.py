@@ -5,11 +5,11 @@ import pandas as pd
 import snowflake.connector
 from scripts import (
     desc_storage_integration,
+    landing_table,
+    prepared_table,
+    raw_table,
     stage,
     storage_integration,
-    landing_table,
-    raw_table,
-    prepared_table
 )
 
 path_root = Path(__file__).parents[1]

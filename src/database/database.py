@@ -2,7 +2,14 @@ import sys
 from pathlib import Path
 
 import snowflake.connector
-from scripts import database, landing_schema, raw_schema, prepared_schema, curated_schema, file_format
+from scripts import (
+    curated_schema,
+    database,
+    file_format,
+    landing_schema,
+    prepared_schema,
+    raw_schema,
+)
 
 path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
@@ -45,8 +52,7 @@ class DataBase:
                 print(e)
 
     def create_file_format(self):
-        """
-        """
+        """ """
         with self.connection.cursor() as cursor:
             try:
                 cursor.execute(file_format)

@@ -2,7 +2,14 @@ import sys
 from pathlib import Path
 
 import snowflake.connector
-from scripts import landing_task, raw_task, prepared_task, resume_landing, resume_raw, resume_prepared
+from scripts import (
+    landing_task,
+    prepared_task,
+    raw_task,
+    resume_landing,
+    resume_prepared,
+    resume_raw,
+)
 
 path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
@@ -34,8 +41,7 @@ class Tasks:
                 print(e)
 
     def resume_tasks(self):
-        """
-        """
+        """ """
         with self.connection.cursor() as cursor:
             try:
                 cursor.execute(resume_prepared)
