@@ -1,5 +1,5 @@
 profile = "miad"
-project = "terraform-templates"
+project = "stock-analysis"
 region  = "us-east-1"
 instance-size = "small"
 instance-type = "t2"
