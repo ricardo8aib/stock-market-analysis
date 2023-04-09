@@ -17,9 +17,3 @@ curated_view = f"""
         {settings.DATABASE}.{settings.PREPARED_SCHEMA}.{settings.PREPARED_TABLE_NAME}
     ;
 """
-
-grant_select = f"""
-    GRANT SELECT
-    ON VIEW {settings.DATABASE}.{settings.CURATED_SCHEMA}.{settings.CURATED_VIEW_NAME}
-    TO ROLE {settings.READ_ROLE}
-"""
