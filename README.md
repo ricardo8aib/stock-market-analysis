@@ -45,7 +45,7 @@ This architecture was chosen for its ability to handle large amounts of data and
 ### 4.1 AWS Infrastructure
 
 The AWS infrastructure is managed through IaC (Infrastructure as Code) using Terraform. The environment is defined in configuration files within the [infrastructure](https://github.com/ricardo8aib/stock-market-analysis/tree/main/infrastructure) folder, which we can version, control, and replicate more effectively than if we used manual processes to configure our servers.
-This includes the EC2 server with Airbyte and the S3 bucket that will serve as a data lake. Also all the parameters needed such as names and credentiasl can be replicated based on the [.env.example file](https://github.com/ricardo8aib/stock-market-analysis/blob/main/.env.example).
+This includes the EC2 server with Airbyte and the S3 bucket that will serve as a data lake. Also all the parameters needed such as names and credentiasl can be replicated based on the [.env.template file](https://github.com/ricardo8aib/stock-market-analysis/blob/main/.env.template).
 
 #### 4.1.1 Airbyte EC2 Instance
 
@@ -70,7 +70,7 @@ This bucket can be initialized using the make command `make create-s3-snowflake-
 
 ### 4.2 Snowflake
 
-The whole Snowflake set up can be done using the `make` commands. The code that executes each of the steps is hosted in the [src folder](https://github.com/ricardo8aib/stock-market-analysis/tree/main/src) and a `.env` file is used to get the parameters. Again, all the parameters needed such as names and credentiasl can be replicated based on the [.env.example file](https://github.com/ricardo8aib/stock-market-analysis/blob/main/.env.example).
+The whole Snowflake set up can be done using the `make` commands. The code that executes each of the steps is hosted in the [src folder](https://github.com/ricardo8aib/stock-market-analysis/tree/main/src) and a `.env` file is used to get the parameters. Again, all the parameters needed such as names and credentiasl can be replicated based on the [.env.template file](https://github.com/ricardo8aib/stock-market-analysis/blob/main/.env.template).
 
 #### 4.2.1 Database
 
