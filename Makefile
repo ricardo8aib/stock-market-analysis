@@ -50,3 +50,7 @@ tasks: ## Run tasks script
 .PHONY: views
 views: ## Run views script
 	poetry run python src/views/views.py
+
+.PHONY: permissions
+permissions: ## Run permissions script
+	poetry run python src/permissions/permissions.py
