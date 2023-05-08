@@ -7,7 +7,7 @@ from scripts import drop_db_script, drop_integration_script
 path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
 
-from config.settings import Settings
+from config.settings import Settings  # noqa: E402
 
 settings = Settings()
 
