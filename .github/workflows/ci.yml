@@ -1,29 +1,29 @@
-name: Continuous Integration Workflow
+# This workflow runs the flake8 linter to assess code format quality.
+# Extend this workflow with the actions you may consider.
 
-on: 
-  pull_request:
-    branches: main
+name: Assess code format
+
+on:
   push:
-    branches: main
+    branches:
+      - main
+      - "*"
+  pull_request:
+    branches:
+      - main
+      - "*"
+
 jobs:
-  format:
-    name: Check format
+  flake8_lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout repository code
+        uses: actions/checkout@v3
 
-      - name: Setup python
-        uses: actions/setup-python@v2
-
-      - name: Run isort
-        uses: jamescurtin/isort-action@master
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
         with:
-          sortPaths: "./src/"
-
-      - name: Run black on source code
-        uses: psf/black@stable
-        with:
-          options: "--check --verbose"
-          src: "."
-          version: "22.10.0"
+          ignore: "E203,W503"
+          path: "."
