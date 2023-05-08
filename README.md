@@ -103,3 +103,10 @@ Summary of the results obtained from the analysis.
 ## Conclusion
 
 Conclusions drawn from the results and any further recommendations.
+
+## Authors
+
+- **Ricardo Ibarra** [ricardo8aib](https://github.com/ricardo8aib)
+- **Cristian Hernandez** [crisheal17](https://github.com/Crisheal17)
+- **Juan Sebastián Delgado** [jsdelgadoc0117](https://github.com/jsdelgadoc0117)
+- **David Zuluaga** [davidzuluagagomez](https://github.com/davidzuluagagomez)
