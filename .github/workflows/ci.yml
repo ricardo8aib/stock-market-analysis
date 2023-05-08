@@ -1,5 +1,4 @@
 # This workflow runs the flake8 linter to assess code format quality.
-# Extend this workflow with the actions you may consider.
 
 name: Assess code format
 
