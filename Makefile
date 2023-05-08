@@ -54,3 +54,7 @@ views: ## Run views script
 .PHONY: permissions
 permissions: ## Run permissions script
 	poetry run python src/permissions/permissions.py
+
+.PHONY: manual
+permissions: ## Run manual script
+	poetry run python src/permissions/manual.py

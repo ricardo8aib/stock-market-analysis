@@ -15,3 +15,7 @@ __pycache__
 
 # .DS_Store
 *.DS_Store
+
+# Manual scripts
+src/manual/manual.py
+src/manual/scripts.py
