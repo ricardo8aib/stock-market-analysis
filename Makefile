@@ -56,5 +56,5 @@ permissions: ## Run permissions script
 	poetry run python src/permissions/permissions.py
 
 .PHONY: manual
-permissions: ## Run manual script
+manual: ## Run manual script
 	poetry run python src/permissions/manual.py
