@@ -57,4 +57,4 @@ permissions: ## Run permissions script
 
 .PHONY: manual
 manual: ## Run manual script
-	poetry run python src/permissions/manual.py
+	poetry run python src/manual/manual.py
