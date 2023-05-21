@@ -58,3 +58,7 @@ permissions: ## Run permissions script
 .PHONY: manual
 manual: ## Run manual script
 	poetry run python src/manual/manual.py
+
+.PHONY: forecast
+forecast: ## Run forecast script
+	poetry run python src/forecast/forecast.py
