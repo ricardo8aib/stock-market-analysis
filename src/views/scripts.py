@@ -12,7 +12,8 @@ curated_view = f"""
     CREATE OR REPLACE VIEW
         {settings.DATABASE}.{settings.CURATED_SCHEMA}.{settings.CURATED_VIEW_NAME}
     AS
-    SELECT *
+    SELECT
+        DISTINCT *
     FROM
         {settings.DATABASE}.{settings.PREPARED_SCHEMA}.{settings.PREPARED_TABLE_NAME}
     ;
