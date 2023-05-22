@@ -36,7 +36,7 @@ This data will be used to analyze the performance of these companies in the stoc
 
 The architecture for this project involves defining AWS resources through Infrastructure As Code using Terraform. AWS EC2 servers are deployed to make calls to the Polygon API through Airbyte. The data is then stored in an AWS S3 data lake before being passed to a data warehouse in Snowflake where it is transformed into RAW, PREPARED, and CURATED schemas for serving to end-users on a PowerBI dashboard.
 
-![Architecture](images/architecure.png)
+![Architecture](images/architechture.png)
 
 This architecture was chosen for its ability to handle large amounts of data and for its scalability. Defining resources through Infrastructure As Code with Terraform allows for efficient management and deployment of resources in a reproducible and scalable way. AWS EC2 servers provide a reliable and cost-effective way to make API calls, while Airbyte allows for seamless data integration from multiple sources. Storing the data in an AWS S3 data lake allows for easy access and retrieval of the data, while Snowflake provides a powerful data warehousing solution with support for multiple data types and seamless integration with other AWS services. Finally, the data is transformed for optimized performance and efficient querying. The PowerBI dashboard provides a user-friendly interface for end-users to interact with the data and gain insights.
 
