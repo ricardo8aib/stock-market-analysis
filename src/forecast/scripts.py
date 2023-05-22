@@ -36,20 +36,40 @@ curated_forecast_view = f"""
     AS
     SELECT
         TO_DATE(TO_TIMESTAMP(TO_NUMBER(DATE)/1000000)) AS DATE,
+        SYMBOL,
         FORECAST,
-        MSE,
-        RMSE,
-        MAPE,
-        MAE,
-        METHOD,
-        SYMBOL
+        METHOD
     FROM
         {settings.DATABASE}.{settings.PREPARED_SCHEMA}.{settings.PREPARED_FORECAST_TABLE_NAME}
+    ;
+"""
+
+curated_forecast_metrics_view = f"""
+    CREATE OR REPLACE VIEW
+        {settings.DATABASE}.{settings.CURATED_SCHEMA}.{settings.CURATED_FORECAST_METRICS_VIEW_NAME}
+    AS
+    SELECT
+        SYMBOL,
+        METHOD,
+        MAX(MSE) AS MSE,
+        MAX(RMSE) AS RMSE,
+        MAX(MAPE) AS MAPE,
+        MAX(MAE) AS MAE
+    FROM
+        {settings.DATABASE}.{settings.PREPARED_SCHEMA}.{settings.PREPARED_FORECAST_TABLE_NAME}
+    GROUP BY SYMBOL, METHOD
     ;
 """
 
 grant_forecast_view = f"""
     GRANT SELECT
     ON VIEW {settings.DATABASE}.{settings.CURATED_SCHEMA}.{settings.CURATED_FORECAST_VIEW_NAME}
+    TO ROLE {settings.READ_ROLE}
+"""
+
+grant_forecast_metrics_view = f"""
+    GRANT SELECT
+    ON VIEW
+    {settings.DATABASE}.{settings.CURATED_SCHEMA}.{settings.CURATED_FORECAST_METRICS_VIEW_NAME}
     TO ROLE {settings.READ_ROLE}
 """

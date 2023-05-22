@@ -62,3 +62,17 @@ manual: ## Run manual script
 .PHONY: forecast
 forecast: ## Run forecast script
 	poetry run python src/forecast/forecast.py
+
+.PHONY: create-lambda-forecast
+create-lambda-forecast: ## Create infrastructure - Lambda data-diff 
+	(cd infrastructure/lambda-forecast; terraform init; terraform apply -target=aws_ecr_repository.repository -auto-approve)
+	(bash push_image.sh)
+	(cd infrastructure/lambda-forecast; terraform init; terraform apply -auto-approve)
+
+.PHONY: destroy-lambda-forecast
+destroy-lambda-forecast: ## Destroy infrastructure - Lambda data-diff
+	(cd infrastructure/lambda-forecast; terraform destroy -auto-approve)
+
+.PHONY: push-container-image
+push-container-image: ## push container image
+	bash push_image.sh

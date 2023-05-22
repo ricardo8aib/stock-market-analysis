@@ -6,8 +6,15 @@ import numpy as np
 import pandas as pd
 import snowflake.connector
 from attributes import attributes
-from models import predict_with_random_forest
-from scripts import create_forecast_table, curated_forecast_view, grant_forecast_view, select_all
+from models import predict_with_random_forest  # , predict_with_xgboost
+from scripts import (
+    create_forecast_table,
+    curated_forecast_metrics_view,
+    curated_forecast_view,
+    grant_forecast_metrics_view,
+    grant_forecast_view,
+    select_all,
+)
 from snowflake.connector.pandas_tools import write_pandas
 
 path_root = Path(__file__).parents[1]
@@ -32,9 +39,11 @@ class Forecast:
             try:
                 cursor.execute(create_forecast_table)
                 cursor.execute(curated_forecast_view)
+                cursor.execute(curated_forecast_metrics_view)
                 cursor.execute(grant_forecast_view)
+                cursor.execute(grant_forecast_metrics_view)
             except Exception as e:
-                print(e)
+                raise e
 
     def get_current_data(self, script: str) -> None:
         """
@@ -73,15 +82,26 @@ class Forecast:
             symbol_data = self.current_data[self.current_data["SYMBOL"] == symbol]
             symbol_attributes = attributes[symbol]
             random_forest_predictions = predict_with_random_forest(
-                symbol_data,
-                symbol,
-                symbol_attributes["RANDOM_FOREST_md"],
-                symbol_attributes["RANDOM_FOREST_ne"],
+                stock_df=symbol_data,
+                symbol=symbol,
+                max_depth=symbol_attributes["RANDOM_FOREST_md"],
+                n_estimators=symbol_attributes["RANDOM_FOREST_ne"],
             )
+            # xgboost_predictions = predict_with_xgboost(
+            #    stock_df=symbol_data,
+            #    symbol=symbol,
+            #    max_depth=symbol_attributes["XGB_md"],
+            #    n_estimators=symbol_attributes["XGB_ne"],
+            #    learning_rate=symbol_attributes["XGB_lr"],
+            # )
             if len(self.predictions) != 0:
-                self.predictions = pd.concat([self.predictions, random_forest_predictions])
+                self.predictions = pd.concat(
+                    [self.predictions, random_forest_predictions]  # , xgboost_predictions]
+                )
             else:
                 self.predictions = random_forest_predictions
+                # pd.concat([random_forest_predictions, xgboost_predictions])
+
         self.predictions.columns = [col.upper() for col in self.predictions.columns]
 
     def upload_predictions(self, target: str) -> None:

@@ -34,6 +34,7 @@ class Settings(pydantic.BaseSettings):
     CURATED_VIEW_NAME: str
     PREPARED_FORECAST_TABLE_NAME: str
     CURATED_FORECAST_VIEW_NAME: str
+    CURATED_FORECAST_METRICS_VIEW_NAME: str
     # Tasks
     LANDING_TASK_SCHEDULE: str
     LANDING_TASK: str
