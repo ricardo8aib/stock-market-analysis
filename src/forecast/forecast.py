@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import snowflake.connector
 from attributes import attributes
-from models import predict_with_random_forest  # , predict_with_xgboost
+from models import predict_with_random_forest, predict_with_xgboost
 from scripts import (
     create_forecast_table,
     curated_forecast_metrics_view,
@@ -87,20 +87,19 @@ class Forecast:
                 max_depth=symbol_attributes["RANDOM_FOREST_md"],
                 n_estimators=symbol_attributes["RANDOM_FOREST_ne"],
             )
-            # xgboost_predictions = predict_with_xgboost(
-            #    stock_df=symbol_data,
-            #    symbol=symbol,
-            #    max_depth=symbol_attributes["XGB_md"],
-            #    n_estimators=symbol_attributes["XGB_ne"],
-            #    learning_rate=symbol_attributes["XGB_lr"],
-            # )
+            xgboost_predictions = predict_with_xgboost(
+                stock_df=symbol_data,
+                symbol=symbol,
+                max_depth=symbol_attributes["XGB_md"],
+                n_estimators=symbol_attributes["XGB_ne"],
+                learning_rate=symbol_attributes["XGB_lr"],
+            )
             if len(self.predictions) != 0:
                 self.predictions = pd.concat(
-                    [self.predictions, random_forest_predictions]  # , xgboost_predictions]
+                    [self.predictions, random_forest_predictions, xgboost_predictions]
                 )
             else:
-                self.predictions = random_forest_predictions
-                # pd.concat([random_forest_predictions, xgboost_predictions])
+                self.predictions = pd.concat([random_forest_predictions, xgboost_predictions])
 
         self.predictions.columns = [col.upper() for col in self.predictions.columns]
 

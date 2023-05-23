@@ -55,7 +55,7 @@ def predict_with_random_forest(
 def predict_with_xgboost(
     stock_df: pd.DataFrame, symbol: str, learning_rate: float, n_estimators: int, max_depth: int
 ) -> pd.DataFrame:
-    stock_df = stock_df[(stock_df["SYMBOL"] == "AAPL")]
+    stock_df = stock_df[(stock_df["SYMBOL"] == symbol)]
     stock_df["DATE"] = pd.to_datetime(stock_df["DATE"])
     stock_df["CLOSE"] = stock_df["CLOSE"].astype(float)
     data = (
@@ -79,8 +79,10 @@ def predict_with_xgboost(
     )
 
     forecaster_xgb.fit(y=data["y"])
+
     steps = 30
     predictions = forecaster_xgb.predict(steps=steps)
+
     error_mse = mean_squared_error(y_true=data_test["y"][1:28], y_pred=predictions[1:28])
     mape = mean_absolute_percentage_error(y_true=data_test["y"][1:28], y_pred=predictions[1:28])
     mae = mean_absolute_error(y_true=data_test["y"][1:28], y_pred=predictions[1:28])
@@ -91,12 +93,12 @@ def predict_with_xgboost(
     fin = data_test.index.max()
     fwd_dates = pd.date_range(fin, periods=10).tolist()
 
-    predicted = pd.DataFrame(list(zip(fwd_dates, predictions_XG)), columns=["DATE", "FORECAST"])
-    predicted["mse"] = error_mse
-    predicted["rmse"] = RMSE
-    predicted["mape"] = mape
-    predicted["mae"] = mae
-    predicted["METHOD"] = "XGBOOST"
-    predicted["SYMBOL"] = symbol
+    ret = pd.DataFrame(list(zip(fwd_dates, predictions_XG)), columns=["DATE", "FORECAST"])
+    ret["mse"] = error_mse
+    ret["rmse"] = RMSE
+    ret["mape"] = mape
+    ret["mae"] = mae
+    ret["METHOD"] = "XGBOOST"
+    ret["SYMBOL"] = symbol
 
-    return predicted
+    return ret
