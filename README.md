@@ -92,17 +92,14 @@ The make command `make views` from the root directory of this repo creates the v
 
 The make command `make permissions` from the root directory of this repo grants the permissions to use the database, schema and views to an assigned user.
 
-## Analysis
+## 5. ML Models
 
-Description of the analysis performed on the data.
+In our project, machine learning (ML) models play a crucial role in predicting and forecasting stock prices. These models are trained using a Lambda function, which is created from a Docker image stored in the AWS Elastic Container Registry (ECR) repository. This approach allows us to efficiently manage and deploy our ML models in a scalable and serverless environment.
 
-## Results
+The Lambda function serves as the core component for training our ML models. By using a Docker image from the ECR repository, we can easily package all the necessary dependencies, libraries, and configurations required for our ML model training. Once the ML models are trained, the Lambda function seamlessly integrates with our Snowflake database to ingest the forecasted stock price results.
 
-Summary of the results obtained from the analysis.
+This setup enables us to leverage the power of serverless computing, containerization, and cloud-based data warehousing to drive accurate predictions and insights for our stock market analysis and trading strategies.
 
-## Conclusion
-
-Conclusions drawn from the results and any further recommendations.
 
 ## Authors
 
