@@ -30,7 +30,7 @@ def predict_with_random_forest(
     regressor_RF = RandomForestRegressor(
         max_depth=max_depth, n_estimators=n_estimators, random_state=123
     )
-    forecaster = ForecasterAutoreg(regressor=regressor_RF, lags=5)
+    forecaster = ForecasterAutoreg(regressor=regressor_RF, lags=20)
     forecaster.fit(y=data_train["y"])
 
     predictions = forecaster.predict(steps=steps)
@@ -136,7 +136,7 @@ def predict_with_lstm(stock_df: pd.DataFrame, symbol: str, units: int, epochs: i
 
     steps = 30
     n_back = 3
-    num_prediction = 10
+    num_prediction = 9
     data_test = data[-steps:]
 
     close_train = close_data[:-steps]

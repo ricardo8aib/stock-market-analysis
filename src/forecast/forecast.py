@@ -80,6 +80,7 @@ class Forecast:
 
         for symbol in self.symbols:
             symbol_data = self.current_data[self.current_data["SYMBOL"] == symbol]
+            symbol_data = symbol_data.sort_values(by="DATE")
             symbol_attributes = attributes[symbol]
             random_forest_predictions = predict_with_random_forest(
                 stock_df=symbol_data,
